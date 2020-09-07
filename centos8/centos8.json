@@ -2,7 +2,8 @@
     "variables":
         {
             "centos8_iso_url": "https://mirrors.edge.kernel.org/centos/8.1.1911/isos/x86_64/CentOS-8.1.1911-x86_64-boot.iso",
-            "centos8_sha256sum_url": "https://mirrors.edge.kernel.org/centos/8.1.1911/isos/x86_64/CHECKSUM"
+            "centos8_sha256sum_url": "https://mirrors.edge.kernel.org/centos/8.1.1911/isos/x86_64/CHECKSUM",
+            "http_proxy": "{{env `HTTP_PROXY`}}"
         },
     "builders": [
         {
@@ -14,6 +15,7 @@
             "boot_command": [
                 "<tab> ",
                 "inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos8.ks ",
+                "inst.proxy={{user `http_proxy`}}",
                 "<enter>"
             ],
             "boot_wait": "3s",
