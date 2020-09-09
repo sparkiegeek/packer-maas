@@ -3,14 +3,15 @@
         {
             "centos8_iso_url": "https://mirrors.edge.kernel.org/centos/8.1.1911/isos/x86_64/CentOS-8.1.1911-x86_64-boot.iso",
             "centos8_sha256sum_url": "https://mirrors.edge.kernel.org/centos/8.1.1911/isos/x86_64/CHECKSUM",
-            "http_proxy": "{{env `HTTP_PROXY`}}"
+            "http_proxy": "{{env `HTTP_PROXY`}}",
+	    "cpu_count": "{{env `CPU_COUNT`}}"
         },
     "builders": [
         {
             "type": "qemu",
             "communicator": "none",
+	    "cpus": "{{user `cpu_count`}}",
             "iso_url": "{{user `centos8_iso_url`}}",
-            "iso_checksum_type": "sha256",
             "iso_checksum_url": "{{user `centos8_sha256sum_url`}}",
             "boot_command": [
                 "<tab> ",
